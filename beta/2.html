@@ -31,6 +31,7 @@
             <!-- Les résultats seront affichés ici -->
         </div>
     </div>
+    
 </div>
 
 <!-- Modale pour informations initiales -->
@@ -53,6 +54,17 @@
                     <div class="mb-3">
                         <label for="birthDate" class="form-label">Date de Naissance</label>
                         <input type="date" id="birthDate" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="height" class="form-label">Taille (cm)</label>
+                        <input type="number" id="height" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Sexe</label>
+                        <select id="gender" class="form-control" required>
+                            <option value="male">Homme</option>
+                            <option value="female">Femme</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
@@ -87,6 +99,10 @@
                         <label for="expenses" class="form-label">Dépenses (€)</label>
                         <input type="number" id="expenses" class="form-control" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Poids (kg)</label>
+                        <input type="number" id="weight" class="form-control" required>
+                    </div>
                     <button type="submit" class="btn btn-primary">Calculer et Enregistrer</button>
                 </form>
             </div>
@@ -96,35 +112,33 @@
 
 <script>
 $(document).ready(function () {
-    // Sons d'ambiance (optionnels, à commenter si non utilisés)
-    const soundClick = new Audio('click-sound.mp3'); // Assurez-vous d'avoir un fichier sonore pour le clic
-    const soundSuccess = new Audio('success-sound.mp3'); // Son de réussite pour les enregistrements
+    const soundClick = new Audio('click-sound.mp3');
+    const soundSuccess = new Audio('success-sound.mp3');
     const playSound = (sound) => sound.play();
 
-    // Charger les informations personnelles initiales
     const loadInitialInfo = () => {
         const initialInfo = JSON.parse(localStorage.getItem('initialInfo'));
         if (initialInfo) {
             $('#name').val(initialInfo.name);
             $('#firstName').val(initialInfo.firstName);
             $('#birthDate').val(initialInfo.birthDate);
+            $('#height').val(initialInfo.height);
+            $('#gender').val(initialInfo.gender);
             $('#initialInfoModal').modal('hide');
         } else {
             $('#initialInfoModal').modal('show');
         }
     };
 
-    // Enregistrer les informations personnelles
     const saveInitialInfo = (data) => {
-        if (data.name && data.firstName && data.birthDate) {
+        if (data.name && data.firstName && data.birthDate && data.height && data.gender) {
             localStorage.setItem('initialInfo', JSON.stringify(data));
-            playSound(soundSuccess); // Son de succès à l'enregistrement
+            playSound(soundSuccess);
         } else {
             alert("Veuillez remplir toutes les informations personnelles.");
         }
     };
 
-    // Charger les informations financières variables
     const loadVariableInfo = () => {
         const variableInfo = JSON.parse(localStorage.getItem('variableInfo'));
         if (variableInfo) {
@@ -132,31 +146,58 @@ $(document).ready(function () {
             $('#income').val(variableInfo.income);
             $('#savingsRate').val(variableInfo.savingsRate);
             $('#expenses').val(variableInfo.expenses);
+            $('#weight').val(variableInfo.weight);
         }
     };
 
-    // Enregistrer les informations financières variables
     const saveVariableInfo = (data) => {
-        if (data.income >= 0 && data.savingsRate >= 0 && data.expenses >= 0 && data.activityLevel) {
+        if (data.income >= 0 && data.savingsRate >= 0 && data.expenses >= 0 && data.activityLevel && data.weight > 0) {
             localStorage.setItem('variableInfo', JSON.stringify(data));
-            playSound(soundSuccess); // Son de succès à l'enregistrement
+            playSound(soundSuccess);
         } else {
-            alert("Veuillez entrer des valeurs valides pour les informations financières.");
+            alert("Veuillez entrer des valeurs valides pour les informations financières et le poids.");
         }
     };
 
-    // Calcul des résultats financiers
     const calculateResults = (data) => {
         try {
             const initialInfo = JSON.parse(localStorage.getItem('initialInfo'));
             const age = new Date().getFullYear() - new Date(initialInfo.birthDate).getFullYear();
+            const height = parseFloat(initialInfo.height);
+            const weight = parseFloat(data.weight);
+            const gender = initialInfo.gender;
+
+            let bmr;
+            if (gender === "male") {
+                bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+            } else {
+                bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+            }
+
+            const activityFactor = 1.2 + (data.activityLevel - 1) * 0.175;
+            const dej = bmr * activityFactor;
+
+            const heightInMeters = height / 100;
+            const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(2);
+
+            const idealWeightDevine = (gender === "male")
+                ? 50 + 0.9 * (height - 152.4)
+                : 45.5 + 0.9 * (height - 152.4);
+            const idealWeightLorentz = (gender === "male")
+                ? height - 100 - (height - 150) / 4
+                : height - 100 - (height - 150) / 2;
 
             const financialBalance = (data.income - data.expenses).toFixed(2);
             const savingsPotential = ((data.income - data.expenses) * data.savingsRate / 100).toFixed(2);
 
             return {
                 financialBalance,
-                savingsPotential
+                savingsPotential,
+                bmr: bmr.toFixed(2),
+                dej: dej.toFixed(2),
+                bmi,
+                idealWeightDevine: idealWeightDevine.toFixed(2),
+                idealWeightLorentz: idealWeightLorentz.toFixed(2)
             };
         } catch (error) {
             console.error("Erreur lors du calcul des résultats :", error);
@@ -165,46 +206,50 @@ $(document).ready(function () {
         }
     };
 
-    // Affichage des résultats financiers avec animation
     const displayResults = (results) => {
         if (results) {
             $('#results').html(`
                 <p><strong>Balance Financière :</strong> ${results.financialBalance} €</p>
                 <p><strong>Potentiel d'Épargne :</strong> ${results.savingsPotential} €</p>
+                <p><strong>Métabolisme de Base (MB) :</strong> ${results.bmr} kcal</p>
+                <p><strong>Dépense Énergétique Journalière (DEJ) :</strong> ${results.dej} kcal</p>
+                <p><strong>Indice de Masse Corporelle (IMC) :</strong> ${results.bmi}</p>
+                <p><strong>Poids Idéal (Devine) :</strong> ${results.idealWeightDevine} kg</p>
+                <p><strong>Poids Idéal (Lorentz) :</strong> ${results.idealWeightLorentz} kg</p>
             `);
-            $('#results').fadeIn(500); // Animation d'affichage en fondu
+            $('#results').fadeIn(500);
         } else {
             $('#results').html('<p class="text-danger">Erreur dans le calcul des résultats.</p>');
         }
     };
 
-    // Gestion du formulaire d'informations initiales
     $('#initialInfoForm').submit(function (event) {
         event.preventDefault();
         const initialInfo = {
             name: $('#name').val().trim(),
             firstName: $('#firstName').val().trim(),
-            birthDate: $('#birthDate').val()
+            birthDate: $('#birthDate').val(),
+            height: $('#height').val(),
+            gender: $('#gender').val()
         };
         saveInitialInfo(initialInfo);
         $('#initialInfoModal').modal('hide');
     });
 
-    // Ouverture du modal d'informations variables et chargement des données
     $('#openModalBtn').click(() => {
-        playSound(soundClick); // Son de clic pour une expérience immersive
+        playSound(soundClick);
         $('#variableInfoModal').modal('show');
         loadVariableInfo();
     });
 
-    // Gestion du formulaire d'informations variables
     $('#variableInfoForm').submit(function (event) {
         event.preventDefault();
         const variableInfo = {
             activityLevel: $('#activityLevel').val(),
             income: parseFloat($('#income').val()),
             savingsRate: parseFloat($('#savingsRate').val()),
-            expenses: parseFloat($('#expenses').val())
+            expenses: parseFloat($('#expenses').val()),
+            weight: parseFloat($('#weight').val())
         };
 
         saveVariableInfo(variableInfo);
@@ -213,10 +258,8 @@ $(document).ready(function () {
         $('#variableInfoModal').modal('hide');
     });
 
-    // Charger les informations au chargement de la page
     loadInitialInfo();
 });
-
 </script>
 
 </body>
