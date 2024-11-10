@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Développement Personnel et Financier - Mode Immersif</title>
+    <!-- Bootstrap et Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Custom CSS pour l'ambiance de jeu vidéo -->
+    <style>
+        /* Thème sombre et futuriste */
+        body {
+            background: linear-gradient(130deg, #141e30, #243b55);
+            font-family: 'Press Start 2P', cursive;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+        }
+        h2, h4 {
+            color: #00ff99;
+            text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
+        }
+        #openModalBtn, .btn-primary {
+            background-color: #ff007f;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 127, 0.5);
+        }
+        #openModalBtn:hover, .btn-primary:hover {
+            transform: scale(1.05);
+            background-color: #ff4d9d;
+        }
+        /* Style du modal pour plus d’immersion */
+        .modal-content {
+            background: rgba(36, 59, 85, 0.9);
+            border: 2px solid #00ff99;
+            border-radius: 12px;
+            box-shadow: 0 0 20px #00ff99;
+        }
+        /* Affichage des résultats avec animations */
+        #results {
+            font-size: 1.2em;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Boutons custom pour une expérience de jeu */
+        .btn-close {
+            color: #ff007f;
+            background-color: #243b55;
+        }
+        .form-label {
+            color: #00ff99;
+        }
+    </style>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Popper.js et Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container my-5">
+    <h2>Évaluation Personnelle et Financière - Mode Immersif</h2>
+    <button id="openModalBtn" class="btn btn-primary my-3">
+        <i class="fas fa-user"></i> Modifier Informations Variables
+    </button>
+    
+    <div id="resultContainer" class="mt-4">
+        <h4>Résultats :</h4>
+        <div id="results" class="p-3 border rounded">
+            <!-- Les résultats seront affichés ici -->
+        </div>
+    </div>
+</div>
+
+<!-- Modale pour informations initiales -->
+<div class="modal fade" id="initialInfoModal" tabindex="-1" aria-labelledby="initialInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="initialInfoModalLabel">Informations Personnelles (Définitives)</h5>
+            </div>
+            <div class="modal-body">
+                <form id="initialInfoForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nom</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">Prénom</label>
+                        <input type="text" id="firstName" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="birthDate" class="form-label">Date de Naissance</label>
+                        <input type="date" id="birthDate" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modale pour informations variables -->
+<div class="modal fade" id="variableInfoModal" tabindex="-1" aria-labelledby="variableInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="variableInfoModalLabel">Informations Variables</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="variableInfoForm">
+                    <div class="mb-3">
+                        <label for="activityLevel" class="form-label">Niveau d'Activité Physique</label>
+                        <input type="range" id="activityLevel" class="form-range" min="1" max="5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="income" class="form-label">Revenus (€)</label>
+                        <input type="number" id="income" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="savingsRate" class="form-label">Épargne (%)</label>
+                        <input type="range" id="savingsRate" class="form-range" min="0" max="100" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expenses" class="form-label">Dépenses (€)</label>
+                        <input type="number" id="expenses" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Calculer et Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function () {
+    // Sons d'ambiance (optionnels, à commenter si non utilisés)
+    const soundClick = new Audio('click-sound.mp3'); // Assurez-vous d'avoir un fichier sonore pour le clic
+    const soundSuccess = new Audio('success-sound.mp3'); // Son de réussite pour les enregistrements
+    const playSound = (sound) => sound.play();
+
+    // Charger les informations personnelles initiales
+    const loadInitialInfo = () => {
+        const initialInfo = JSON.parse(localStorage.getItem('initialInfo'));
+        if (initialInfo) {
+            $('#name').val(initialInfo.name);
+            $('#firstName').val(initialInfo.firstName);
+            $('#birthDate').val(initialInfo.birthDate);
+            $('#initialInfoModal').modal('hide');
+        } else {
+            $('#initialInfoModal').modal('show');
+        }
+    };
+
+    // Enregistrer les informations personnelles
+    const saveInitialInfo = (data) => {
+        if (data.name && data.firstName && data.birthDate) {
+            localStorage.setItem('initialInfo', JSON.stringify(data));
+            playSound(soundSuccess); // Son de succès à l'enregistrement
+        } else {
+            alert("Veuillez remplir toutes les informations personnelles.");
+        }
+    };
+
+    // Charger les informations financières variables
+    const loadVariableInfo = () => {
+        const variableInfo = JSON.parse(localStorage.getItem('variableInfo'));
+        if (variableInfo) {
+            $('#activityLevel').val(variableInfo.activityLevel);
+            $('#income').val(variableInfo.income);
+            $('#savingsRate').val(variableInfo.savingsRate);
+            $('#expenses').val(variableInfo.expenses);
+        }
+    };
+
+    // Enregistrer les informations financières variables
+    const saveVariableInfo = (data) => {
+        if (data.income >= 0 && data.savingsRate >= 0 && data.expenses >= 0 && data.activityLevel) {
+            localStorage.setItem('variableInfo', JSON.stringify(data));
+            playSound(soundSuccess); // Son de succès à l'enregistrement
+        } else {
+            alert("Veuillez entrer des valeurs valides pour les informations financières.");
+        }
+    };
+
+    // Calcul des résultats financiers
+    const calculateResults = (data) => {
+        try {
+            const initialInfo = JSON.parse(localStorage.getItem('initialInfo'));
+            const age = new Date().getFullYear() - new Date(initialInfo.birthDate).getFullYear();
+
+            const financialBalance = (data.income - data.expenses).toFixed(2);
+            const savingsPotential = ((data.income - data.expenses) * data.savingsRate / 100).toFixed(2);
+
+            return {
+                financialBalance,
+                savingsPotential
+            };
+        } catch (error) {
+            console.error("Erreur lors du calcul des résultats :", error);
+            alert("Impossible de calculer les résultats. Veuillez vérifier vos données.");
+            return null;
+        }
+    };
+
+    // Affichage des résultats financiers avec animation
+    const displayResults = (results) => {
+        if (results) {
+            $('#results').html(`
+                <p><strong>Balance Financière :</strong> ${results.financialBalance} €</p>
+                <p><strong>Potentiel d'Épargne :</strong> ${results.savingsPotential} €</p>
+            `);
+            $('#results').fadeIn(500); // Animation d'affichage en fondu
+        } else {
+            $('#results').html('<p class="text-danger">Erreur dans le calcul des résultats.</p>');
+        }
+    };
+
+    // Gestion du formulaire d'informations initiales
+    $('#initialInfoForm').submit(function (event) {
+        event.preventDefault();
+        const initialInfo = {
+            name: $('#name').val().trim(),
+            firstName: $('#firstName').val().trim(),
+            birthDate: $('#birthDate').val()
+        };
+        saveInitialInfo(initialInfo);
+        $('#initialInfoModal').modal('hide');
+    });
+
+    // Ouverture du modal d'informations variables et chargement des données
+    $('#openModalBtn').click(() => {
+        playSound(soundClick); // Son de clic pour une expérience immersive
+        $('#variableInfoModal').modal('show');
+        loadVariableInfo();
+    });
+
+    // Gestion du formulaire d'informations variables
+    $('#variableInfoForm').submit(function (event) {
+        event.preventDefault();
+        const variableInfo = {
+            activityLevel: $('#activityLevel').val(),
+            income: parseFloat($('#income').val()),
+            savingsRate: parseFloat($('#savingsRate').val()),
+            expenses: parseFloat($('#expenses').val())
+        };
+
+        saveVariableInfo(variableInfo);
+        const results = calculateResults(variableInfo);
+        displayResults(results);
+        $('#variableInfoModal').modal('hide');
+    });
+
+    // Charger les informations au chargement de la page
+    loadInitialInfo();
+});
+
+</script>
+
+</body>
+</html>
