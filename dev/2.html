@@ -11,140 +11,78 @@
     -->
     <style>
     /** Exemple **/
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        color: #333;
-        margin: 0;
-        padding: 20px;
-    }
+/* Conteneur des résultats */
+.resultats-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+    width: 80%;
+    color: #d4d4d8;
+}
 
-    h2 {
-        text-align: center;
-        color: #1f78b4;
-    }
+/* Style des colonnes de résultats */
+.colonne {
+    width: 45%;
+    padding: 20px;
+    background: #1a1a2e;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 255, 204, 0.5);
+    transition: box-shadow 0.3s ease;
+}
 
-    button {
-        background-color: #1f78b4;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        margin: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+.colonne:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
+}
 
-    button:hover {
-        background-color: #155a8a;
-    }
+/* Titres et textes dans les colonnes */
+.colonne strong {
+    font-size: 1.3em;
+    color: #00ffcc;
+    text-shadow: 0 0 4px #00ffcc;
+    display: block;
+    margin-bottom: 10px;
+}
 
-    /* Boîtes de dialogue */
-    dialog {
-        border: solid 1px #1f78b4;
-        border-radius: 8px;
-        padding: 20px;
-        max-width: 400px;
-    }
+.colonne p {
+    font-size: 1em;
+    line-height: 1.8;
+    color: #d4d4d8;
+    margin: 5px 0;
+}
 
-    dialog h3 {
-        color: #1f78b4;
-    }
+/* Icônes et valeurs de sortie */
+i {
+    color: #00ffcc;
+    margin-right: 8px;
+}
 
-    dialog form label {
-        font-weight: bold;
-    }
+output {
+    color: #f0f0f0;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 2px 5px;
+    background: #333;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #00ffcc;
+}
 
-    dialog form input[type="text"],
-    dialog form input[type="date"],
-    dialog form input[type="number"],
-    dialog form input[type="range"] {
-        width: calc(100% - 20px);
-        padding: 8px;
-        margin: 5px 0 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
-    }
+/* Effet de néon au survol des colonnes */
+.colonne:hover output {
+    box-shadow: 0 0 10px #00ffcc;
+}
 
-    dialog form input[type="radio"] {
-        margin-right: 5px;
-    }
-
-    dialog form button {
-        background-color: #e74c3c;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    dialog form button:hover {
-        background-color: #c0392b;
-    }
-
-    /* Conteneur des résultats */
+/* Responsive pour petits écrans */
+@media screen and (max-width: 768px) {
     .resultats-container {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        align-items: center;
     }
-
+    
     .colonne {
-        flex: 1;
-        padding: 10px;
+        width: 90%;
+        margin-bottom: 20px;
     }
-
-    .colonne p {
-        font-size: 16px;
-        line-height: 1.6;
-        margin: 10px 0;
-    }
-
-    /* Icônes */
-    .colonne i {
-        color: #1f78b4;
-        margin-right: 5px;
-    }
-
-    /* Style pour les outputs */
-    output {
-        font-weight: bold;
-        color: #333;
-    }
-
-    /* Style pour les sliders */
-    input[type="range"] {
-        width: 100%;
-    }
-
-    /* Styles responsifs */
-    @media (max-width: 768px) {
-        .resultats-container {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .colonne {
-            width: 100%;
-            padding: 5px;
-        }
-
-        button {
-            width: 100%;
-            margin: 5px 0;
-        }
-
-        dialog {
-            width: 90%;
-        }
-    }
+}
     </style>
 </head>
 <body>
@@ -152,9 +90,9 @@
 <h2>💠 Profil 💠</h2>
 <!-- Input -->
 <!-- Boutons pour ouvrir chaque formulaire dans une boîte de dialogue -->
-<button onclick="document.getElementById('dialogGenetique').showModal()">🧬 Identité</button>
+<button onclick="document.getElementById('dialogGenetique').showModal()">🧬<!--Identité--> Créer un compte</button>
 <button onclick="document.getElementById('dialogEnvironnement').showModal()">⚙️ Caractéristiques</button>
-<button onclick="document.getElementById('dialogArgent').showModal()">💰 Argent</button>
+<button onclick="document.getElementById('dialogArgent').showModal()">💰 Inventaire</button>
 
 <!-- 🧬 Informations Définies par le Code Génétique -->
 <dialog id="dialogGenetique">
@@ -207,8 +145,8 @@
 <div class="resultats-container"><!-- UI | Output-->
 
     <div class="colonne">
-        <!-- Colonne Santé -->
-        <p><i class="fa-solid fa-heartbeat" title="Santé"></i> Santé : <output id="sante">x</output> %</p>
+        <!--Santé-->
+        <strong><i class="fa-solid fa-heartbeat" title="Santé"></i> Santé : <output id="sante">x</output> %</strong>
         <p><i class="fa-solid fa-birthday-cake" title="Âge"></i> Âge : <output id="age">0</output> ans, <output id="jours">0</output> jours</p>
         <p><i class="fa-solid fa-bed" title="Nombre de nuits"></i> Nuits totales : <output id="nuits">0</output></p>
         <p><i class="fa-solid fa-hourglass-half" title="Espérance de vie restante"></i> Vie restante : <output id="esperance">0</output> ans</p>
@@ -217,20 +155,20 @@
     </div>
 
     <div class="colonne">
-        <!-- Colonne Finance -->
-        <p><i class="fa-solid fa-coins" title="Argent"></i> Argent : <output id="argent">x</output> €</p>
+        <!--Finance-->
+        <strong><i class="fa-solid fa-coins" title="Argent"></i> Argent : <output id="argent">x</output> €</strong>
         <p>
-            <i class="fa-solid fa-hand-holding-dollar" title="Revenus"></i> Revenus : <output id="revenus">0</output> €,
-            <i class="fa-solid fa-piggy-bank" title="Épargne"></i> Épargne : <output id="epargne">0</output> €,
-            <i class="fa-solid fa-credit-card" title="Dépenses"></i> Dépenses : <output id="depenses">0</output> €
+            <i class="fa-solid fa-hand-holding-dollar" title="Revenus"></i> Revenus : <output id="revenus">0</output> € | 
+            <i class="fa-solid fa-credit-card" title="Dépenses"></i> Dépenses : <output id="depenses">0</output> € | 
+            <i class="fa-solid fa-piggy-bank" title="Épargne"></i> Épargne : <output id="epargne">0</output> %
         </p>
         <p><i class="fa-solid fa-wallet" title="Revenus nets"></i> Revenus nets : <output id="net_revenu">0</output> €</p>
-        <p><i class="fa-solid fa-percentage" title="Taux d'épargne"></i> Taux d'épargne : <output id="taux_epargne">0</output> %, Montant : <output id="montant_epargne">0</output> €</p>
+        <p><i class="fa-solid fa-percentage" title="Taux d'épargne"></i> Taux d'épargne : <output id="taux_epargne">0</output> % |  Montant : <output id="montant_epargne">0</output> €</p>
     </div>
 
 </div>
 
-<!-- script JavaScript -->
+<!--JavaScript-->
 <script src="dataManager.js"></script>
 <script src="calculations.js"></script>
 </body>

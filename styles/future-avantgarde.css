@@ -1,0 +1,148 @@
+/* Style Global */
+body {
+    background-color: #111;
+    font-family: 'Orbitron', sans-serif;
+    color: #d4d4d8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+h2 {
+    color: #00ffcc;
+    text-transform: uppercase;
+    font-size: 2em;
+    margin: 20px 0;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 8px #00ffcc;
+}
+
+/* Boutons */
+button {
+    background: linear-gradient(45deg, #00ffcc, #00bfa5);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0px 0px 4px #00ffcc;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 12px #00ffcc;
+}
+
+/* Dialogues */
+dialog {
+    background: #1a1a2e;
+    color: #00ffcc;
+    border: 2px solid #00ffcc;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
+    padding: 20px;
+    max-width: 400px;
+    font-size: 1.1em;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Formulaires */
+form label {
+    display: block;
+    margin-top: 15px;
+    color: #d4d4d8;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="date"],
+form input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 2px solid #00ffcc;
+    border-radius: 4px;
+    background: #222;
+    color: #fff;
+    outline: none;
+    font-family: 'Orbitron', sans-serif;
+}
+
+form input[type="radio"] {
+    margin: 0 5px;
+}
+
+/* Sections de Résultats */
+.resultats-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+    width: 80%;
+}
+
+.colonne {
+    width: 45%;
+    padding: 20px;
+    background: #1a1a2e;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 255, 204, 0.5);
+}
+
+.colonne strong {
+    font-size: 1.3em;
+    color: #00ffcc;
+    text-shadow: 0 0 4px #00ffcc;
+}
+
+.colonne p {
+    font-size: 1em;
+    line-height: 1.8;
+    color: #d4d4d8;
+    margin: 5px 0;
+}
+
+/* Icônes et Outputs */
+i {
+    color: #00ffcc;
+    margin-right: 8px;
+}
+
+output {
+    color: #f0f0f0;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 2px 5px;
+    background: #333;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #00ffcc;
+}
+
+/* Effet Néon pour l'interactivité */
+button, dialog, .colonne {
+    transition: box-shadow 0.3s ease;
+}
+
+button:hover, dialog:hover, .colonne:hover {
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
+}
+
+@media screen and (max-width: 768px) {
+    .resultats-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .colonne {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}
