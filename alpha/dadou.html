@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Routine</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 20px;
+        }
+        .section {
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Menu -->
+        <section id="menu" class="section">
+            <h3><i class="fas fa-bars"></i> Menu</h3>
+            <ul class="list-group">
+                <li class="list-group-item">Analyse Marché ETH</li>
+                <li class="list-group-item">Analyse Rentabilité Locative</li>
+                <li class="list-group-item">Analyse Dépenses</li>
+                <li class="list-group-item">Exercice - Étirements</li>
+                <li class="list-group-item">Dernier Résultat Sportif</li>
+            </ul>
+        </section>
+
+        <!-- Analyse Marché ETH -->
+        <section id="analyse-marche" class="section">
+            <h3><i class="fab fa-ethereum"></i> Analyse Marché ETH</h3>
+            <button class="btn btn-primary" onclick="analyseMarche()">Analyser</button>
+            <div id="marche-result" class="mt-3"></div>
+        </section>
+
+        <!-- Analyse Rentabilité Locative -->
+        <section id="analyse-rentabilite" class="section">
+            <h3><i class="fas fa-chart-line"></i> Analyse Rentabilité Locative</h3>
+            <button class="btn btn-primary" onclick="analyseRentabilite()">Analyser</button>
+            <div id="rentabilite-result" class="mt-3"></div>
+        </section>
+
+        <!-- Analyse Dépenses -->
+        <section id="analyse-depenses" class="section">
+            <h3><i class="fas fa-wallet"></i> Analyse Dépenses</h3>
+            <button class="btn btn-primary" onclick="analyseDepenses()">Analyser</button>
+            <div id="depenses-result" class="mt-3"></div>
+        </section>
+
+        <!-- Exercice - Étirements -->
+        <section id="exercice" class="section">
+            <h3><i class="fas fa-dumbbell"></i> Exercice - Étirements</h3>
+            <button class="btn btn-success" onclick="etirementDos()">Étirement Dos</button>
+            <button class="btn btn-success" onclick="etirementJambes()">Étirement Jambes</button>
+            <div id="exercice-result" class="mt-3"></div>
+        </section>
+
+        <!-- Dernier Résultat Sportif -->
+        <section id="dernier-resultat" class="section">
+            <h3><i class="fas fa-futbol"></i> Dernier Résultat Sportif</h3>
+            <button class="btn btn-info" onclick="dernierResultat()">Voir Résultat</button>
+            <div id="resultat-sportif" class="mt-3"></div>
+        </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function analyseMarche() {
+            document.getElementById('marche-result').innerHTML = "Analyse du marché ETH en cours...";
+            // Simulate API response
+            setTimeout(() => {
+                document.getElementById('marche-result').innerHTML = "Le marché ETH est stable aujourd'hui.";
+            }, 2000);
+        }
+
+        function analyseRentabilite() {
+            document.getElementById('rentabilite-result').innerHTML = "Analyse de rentabilité locative en cours...";
+            setTimeout(() => {
+                document.getElementById('rentabilite-result').innerHTML = "La rentabilité locative actuelle est de 8%.";
+            }, 2000);
+        }
+
+        function analyseDepenses() {
+            document.getElementById('depenses-result').innerHTML = "Analyse des dépenses en cours...";
+            setTimeout(() => {
+                document.getElementById('depenses-result').innerHTML = "Dépenses totales mensuelles : 1200 €.";
+            }, 2000);
+        }
+
+        function etirementDos() {
+            document.getElementById('exercice-result').innerHTML = "Étirement du dos en cours...";
+            setTimeout(() => {
+                document.getElementById('exercice-result').innerHTML = "Étirement du dos terminé.";
+            }, 1500);
+        }
+
+        function etirementJambes() {
+            document.getElementById('exercice-result').innerHTML = "Étirement des jambes en cours...";
+            setTimeout(() => {
+                document.getElementById('exercice-result').innerHTML = "Étirement des jambes terminé.";
+            }, 1500);
+        }
+
+        function dernierResultat() {
+            document.getElementById('resultat-sportif').innerHTML = "Chargement du dernier résultat sportif...";
+            setTimeout(() => {
+                document.getElementById('resultat-sportif').innerHTML = "L'équipe a gagné son dernier match 3-1.";
+            }, 2000);
+        }
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

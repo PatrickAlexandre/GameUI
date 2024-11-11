@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul de Valeur Humaine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--Dev Mode
+    <link rel="stylesheet" href="input_dialog.css">
+    <link rel="stylesheet" href="output_cols.css">
+    -->
+    <style>
+    /** Exemple **/
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #1f78b4;
+    }
+
+    button {
+        background-color: #1f78b4;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #155a8a;
+    }
+
+    /* Boîtes de dialogue */
+    dialog {
+        border: solid 1px #1f78b4;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 400px;
+    }
+
+    dialog h3 {
+        color: #1f78b4;
+    }
+
+    dialog form label {
+        font-weight: bold;
+    }
+
+    dialog form input[type="text"],
+    dialog form input[type="date"],
+    dialog form input[type="number"],
+    dialog form input[type="range"] {
+        width: calc(100% - 20px);
+        padding: 8px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    dialog form input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    dialog form button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    dialog form button:hover {
+        background-color: #c0392b;
+    }
+
+    /* Conteneur des résultats */
+    .resultats-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .colonne {
+        flex: 1;
+        padding: 10px;
+    }
+
+    .colonne p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 10px 0;
+    }
+
+    /* Icônes */
+    .colonne i {
+        color: #1f78b4;
+        margin-right: 5px;
+    }
+
+    /* Style pour les outputs */
+    output {
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Style pour les sliders */
+    input[type="range"] {
+        width: 100%;
+    }
+
+    /* Styles responsifs */
+    @media (max-width: 768px) {
+        .resultats-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .colonne {
+            width: 100%;
+            padding: 5px;
+        }
+
+        button {
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        dialog {
+            width: 90%;
+        }
+    }
+    </style>
+</head>
+<body>
+
+<h2>💠 Profil 💠</h2>
+<!-- Input -->
+<!-- Boutons pour ouvrir chaque formulaire dans une boîte de dialogue -->
+<button onclick="document.getElementById('dialogGenetique').showModal()">🧬 Identité</button>
+<button onclick="document.getElementById('dialogEnvironnement').showModal()">⚙️ Caractéristiques</button>
+<button onclick="document.getElementById('dialogArgent').showModal()">💰 Argent</button>
+
+<!-- 🧬 Informations Définies par le Code Génétique -->
+<dialog id="dialogGenetique">
+  <form id="Genetique" class="Genetique"> 
+      <h3>Carte d'Identité</h3>
+      <label for="nom">Nom :</label><input type="text" id="nom" name="nom" placeholder="Nom" required><br><br>
+      <label for="prenom">Prénom(s) :</label><input type="text" id="prenom" name="prenom" placeholder="Prénom" required><br><br>
+      <label>Sexe :</label><input type="radio" id="sexe-male" name="sexe" value="male" required onchange="calculerMB()"><label for="sexe-male">M</label><input type="radio" id="sexe-female" name="sexe" value="female" onchange="calculerMB()"><label for="sexe-female">F</label><br><br>
+      <label for="date_naissance">Né(e) le :</label><input type="date" id="date_naissance" name="date_naissance" required onchange="calculerMB()"><br><br>
+      <label for="taille">Taille (cm) :</label><input type="number" id="taille" name="taille" placeholder="Taille en cm" required oninput="calculerMB()" min="54.6" max="272" value="170"><br><br>
+      <button type="button" onclick="document.getElementById('dialogGenetique').close()">Fermer</button>
+  </form>
+</dialog>
+
+<!-- ⚙️ Décisions et Environnement -->
+<dialog id="dialogEnvironnement"> 
+  <form id="Environnement" class="Decisions"> 
+      <h3>Activité</h3>
+      <label for="niveau_activite">Niveau d'Activité Physique :</label><input type="range" id="niveau_activite" name="niveau_activite" min="1" max="2.5" step="0.5" value="1" oninput="calculerMBR()"><br>
+      <label for="poids">Poids (kg) :</label><input type="number" id="poids" name="poids" placeholder="Poids en kg" required oninput="calculerMB()" min="12" max="635" value="70"><br><br>
+      <button type="button" onclick="document.getElementById('dialogEnvironnement').close()">Fermer</button>
+  </form>
+</dialog>
+
+<!-- 💰 Informations Financières -->
+<dialog id="dialogArgent" class="Decisions"> 
+  <form id="Argent">
+      <h3>Informations Financières</h3>
+      <label for="revenus">Revenus :</label>
+      <input type="number" id="revenus" name="revenus" placeholder="Entrez vos revenus"><br><br>
+
+      <label for="depenses">Dépenses :</label>
+      <input type="number" id="depenses" name="depenses" placeholder="Entrez vos dépenses"><br><br>
+
+      <label for="epargne">Épargne (%) :</label>
+      <input type="range" id="epargne" name="epargne" min="0" max="100" step="1"><br><br>
+
+      <button type="button" onclick="document.getElementById('dialogArgent').close()">Fermer</button>
+  </form>
+</dialog>
+<!-- Input -->
+
+
+<hr>
+
+
+
+
+<h2>[UI] script-Output</h2>
+<div class="resultats-container"><!-- UI | Output-->
+
+    <div class="colonne">
+        <!-- Colonne Santé -->
+        <p><i class="fa-solid fa-heartbeat" title="Santé"></i> Santé : <output id="sante">x</output> %</p>
+        <p><i class="fa-solid fa-birthday-cake" title="Âge"></i> Âge : <output id="age">0</output> ans, <output id="jours">0</output> jours</p>
+        <p><i class="fa-solid fa-bed" title="Nombre de nuits"></i> Nuits totales : <output id="nuits">0</output></p>
+        <p><i class="fa-solid fa-hourglass-half" title="Espérance de vie restante"></i> Vie restante : <output id="esperance">0</output> ans</p>
+        <p><i class="fa-solid fa-calculator" title="Métabolisme de base (MB)"></i> MB = <output id="mb">0</output></p>
+        <p><i class="fa-solid fa-fire" title="Besoins énergétiques (BMR)"></i> BMR = <output id="bmr">0</output></p>
+    </div>
+
+    <div class="colonne">
+        <!-- Colonne Finance -->
+        <p><i class="fa-solid fa-coins" title="Argent"></i> Argent : <output id="argent">x</output> €</p>
+        <p>
+            <i class="fa-solid fa-hand-holding-dollar" title="Revenus"></i> Revenus : <output id="revenus">0</output> €,
+            <i class="fa-solid fa-piggy-bank" title="Épargne"></i> Épargne : <output id="epargne">0</output> €,
+            <i class="fa-solid fa-credit-card" title="Dépenses"></i> Dépenses : <output id="depenses">0</output> €
+        </p>
+        <p><i class="fa-solid fa-wallet" title="Revenus nets"></i> Revenus nets : <output id="net_revenu">0</output> €</p>
+        <p><i class="fa-solid fa-percentage" title="Taux d'épargne"></i> Taux d'épargne : <output id="taux_epargne">0</output> %, Montant : <output id="montant_epargne">0</output> €</p>
+    </div>
+
+</div>
+
+<!-- script JavaScript -->
+<script src="dataManager.js"></script>
+<script src="calculations.js"></script>
+</body>
+</html>

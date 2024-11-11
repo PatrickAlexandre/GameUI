@@ -1,0 +1,36 @@
+.resultats-container {
+    display: flex;
+    gap: 20px; /* Espace entre les colonnes */
+    margin-top: 20px; /* Espacement au-dessus de la section */
+}
+
+.colonne {
+    flex: 1; /* Divise en trois colonnes égales */
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+
+
+/* Résultats <output> */
+output {
+    font-size: 1.5em;
+    color: #ff4c4c; /* Rouge vif pour un contraste marquant */
+    background-color: rgba(255, 76, 76, 0.1); /* Légère teinte pour ressortir */
+    border: 1px solid #ff4c4c;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 76, 76, 0.8), 0 0 10px rgba(255, 76, 76, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Animation d'agrandissement et de brillance sur survol */
+output:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 76, 76, 0.8), 0 0 20px rgba(255, 76, 76, 0.6);
+}

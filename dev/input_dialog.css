@@ -1,0 +1,145 @@
+/* Effet Futuriste */
+
+
+
+
+/* Button */
+button {
+  background-color: #005f5f;
+  border: none;
+  border-radius: 4px;
+  color: #e6e6e6;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #00ffff;
+}
+
+
+
+
+/* Pop-up */
+dialog {
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  color: #e6e6e6;
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  position: relative;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.85);
+  animation: backdropFade 0.5s ease;
+}
+
+
+
+
+/* Label */
+label {
+  color: #b3b3b3;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+
+
+
+/* Input */
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  background-color: #333;
+  border: 1px solid #555;
+  color: #e6e6e6;
+  padding: 8px;
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-size: 1em;
+}
+
+input[type="radio"] {
+  accent-color: #00ffff;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, #00ffff 0%, #003f3f 100%);
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.8;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #00ffff;
+  cursor: pointer;
+}
+
+
+
+
+/* Styles Globaux */
+body {
+  background-color: #0d0d0d;
+  font-family: 'Orbitron', sans-serif;
+  color: #e6e6e6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+h3 {
+  color: #00ffff;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+
+
+
+/* Dialog Spécifiques */
+#dialogGenetique h3, #dialogEnvironnement h3, #dialogArgent h3 {
+  font-size: 1.6em;
+  color: #00ffff;
+}
+
+.Genetic label,
+.Decisions label {
+  font-size: 1em;
+  color: #b3b3b3;
+}
+
+.Genetic input,
+.Decisions input {
+  font-size: 1.1em;
+}
+
+
+
+@keyframes backdropFade {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.85);
+  }
+}
