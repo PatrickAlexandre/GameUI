@@ -41,5 +41,102 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.6.0"></script>
 
+---
+
+# Guide pas à pas pour créer une page HTML "Formule Secrète" avec un style personnalisé
+
+Ce guide vous explique comment créer une page HTML pour afficher une "formule secrète" en utilisant les éléments HTML, CSS, et Bootstrap. Voici le code complet :
+
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formule Secrète</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .formule-secrete {
+            text-align: center;
+            font-family: 'VT323', monospace;
+            padding: 20px;
+        }
+        .titre-secret {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            margin-bottom: 0;
+        }
+        .sous-titre {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .ligne-formule {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="formule-secrete">
+    <h1 class="titre-secret">FORMULE SECRÈTE</h1>
+    <p class="sous-titre">pour Pâtés de Crabe</p>
+    <div class="container">
+        <div class="row ligne-formule">
+            <div class="col-6 text-end">
+                <p>xwogfjeil</p>
+                <p>gdSgehSg</p>
+                <p>shFhgh</p>
+                <p>Bgtyfjei</p>
+                <p>idquifle</p>
+                <p>sjyiled</p>
+            </div>
+            <div class="col-6 text-start">
+                <p>1 c. à thé</p>
+                <p>4 tasses</p>
+                <p>haché</p>
+                <p>2 c. à soupe</p>
+                <p>en dés</p>
+                <p>1 tasse</p>
+                <p>1/2 tasse</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+```
+
+## Explications du code
+
+### En-tête HTML (`<head>`)
+1. **Encodage UTF-8** : `<meta charset="UTF-8">` permet de gérer correctement les caractères spéciaux.
+2. **Viewport** : `<meta name="viewport" content="width=device-width, initial-scale=1.0">` adapte l’affichage aux appareils mobiles.
+3. **Police Google** : Le lien vers Google Fonts importe les polices "Bangers" et "VT323".
+4. **Bootstrap** : Le lien vers Bootstrap fournit des classes pour faciliter la mise en page.
+
+### CSS
+- **Background et alignement** : Le corps de la page est centré avec une couleur de fond douce (`#f8f9fa`).
+- **.formule-secrete** : Classe pour styliser la section centrale et utiliser la police "VT323".
+- **.titre-secret** : Police "Bangers" et taille importante pour le titre.
+- **.sous-titre** et **.ligne-formule** : Taille de police pour les sous-titres et les éléments de la formule.
+
+### Corps HTML (`<body>`)
+1. **Conteneur principal** (`<div class="formule-secrete">`) : Il contient le titre et les sections de la formule.
+2. **Titre principal** (`<h1 class="titre-secret">`) : "FORMULE SECRÈTE" en police Bangers.
+3. **Sous-titre** : Le sous-titre "pour Pâtés de Crabe" en dessous du titre.
+4. **Lignes de la formule** :
+   - Deux colonnes Bootstrap (`col-6`), alignées à droite et à gauche pour simuler une liste d’ingrédients et leurs quantités respectives.
+   
+Vous devriez maintenant avoir une page HTML stylée présentant une formule secrète, centrée et avec une typographie rétro. N'hésitez pas à ajuster les styles ou les éléments selon vos préférences !
+
 
 [Rédiger le code complet, en un seul bloc de code]

@@ -1,97 +1,65 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game UI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Secret Formula</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    output {
-        color: #e0e0e0; /* Gris très clair pour un contraste doux */
-        font-size: 1rem; /* Taille de police modérée pour l’élégance minimaliste */
-        line-height: 1.6; /* Espace entre lignes pour la clarté et la lisibilité */
-        padding: 0.4rem 0.8rem; /* Espace intérieur sobre, sans excès */
-        box-shadow: none; /* Pas d'ombre, pour une esthétique épurée */
-        overflow-wrap: break-word; /* Empêche le débordement du texte */
-    }
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .secret-formula {
+            text-align: center;
+            font-family: 'VT323', monospace;
+            padding: 20px;
+        }
+        .secret-title {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            margin-bottom: 0;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .formula-row {
+            font-size: 1.5rem;
+        }
     </style>
 </head>
-<body class="bg-gray-800 p-8 flex justify-center items-center min-h-screen">
+<body>
 
-    <!-- Container for the UI with Score -->
-    <div class="relative flex bg-gray-900 p-4 rounded-lg border border-gray-700">
-        <!-- Score Section at the Top Right -->
-        <div class="absolute top-2 right-2 bg-gray-700 text-white px-3 py-1 rounded-lg text-sm font-bold">
-            Score: <span class="text-yellow-400">12345</span>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="grid grid-cols-2 gap-1">
-            <div class="flex items-center space-x-2" title="Espérance de vie"><i class="fas fa-heartbeat text-red-500"></i><output>82 ans</output></div>
-
-            <div class="flex items-center space-x-2" title="Indice de masse corporelle (IMC)"><i class="fas fa-weight text-blue-500"></i><output>22.5</output></div>
-            <div class="flex items-center space-x-2" title="Niveau d'activité physique"><i class="fas fa-running text-blue-300"></i><output>3 heures/semaine</output></div>
-            <div class="flex items-center space-x-2" title="Dépense Énergétique Journalière"><i class="fas fa-bolt text-indigo-400"></i><output></output></div>
-            <div class="flex items-center space-x-2" title="Qualité de vie liée à la santé (QVLS)"><i class="fas fa-heart text-pink-500"></i><output>Bon</output></div>
-
-            <div class="flex items-center space-x-2" title="Revenu disponible"><i class="fas fa-wallet text-green-500"></i><output>35,000 €</output></div>
-            <div class="flex items-center space-x-2" title="Taux d'endettement"><i class="fas fa-hand-holding-usd text-purple-500"></i><output>25%</output></div>
-
-            <div class="flex items-center space-x-2" title="Indice de satisfaction de vie"><i class="fas fa-smile text-yellow-300"></i><output>8/10</output></div>
-        </div>
-
-        <!-- Character and Abilities Section -->
-        <div class="flex flex-col items-center space-y-2 pl-4">
-            <!-- Character Icon -->
-            <div class="relative">
-                <div class="w-16 h-16 rounded-full border-4 border-yellow-500 overflow-hidden">
-                    <img src="https://placehold.co/64x64" alt="Character icon">
-                </div>
-                <div class="absolute bottom-0 right-0 bg-red-600 rounded-full text-white text-xs font-bold px-1">6</div>
+<div class="secret-formula">
+    <h1 class="secret-title">SECRET FORMULA</h1>
+    <p class="subtitle">for Krabby Patties</p>
+    <div class="container">
+        <div class="row formula-row">
+            <div class="col-6 text-end">
+                <p>xwogfjeil</p>
+                <p>gdSgehSg</p>
+                <p>shFhgh</p>
+                <p>Bgtyfjei</p>
+                <p>idquifle</p>
+                <p>sjyiled</p>
             </div>
-
-            <!-- Abilities -->
-            <div class="flex space-x-2">
-                <div class="w-10 h-10 bg-gray-700 border border-gray-500 rounded-lg flex justify-center items-center">
-                    <img src="https://placehold.co/32x32" alt="Ability Q">
-                </div>
-                <div class="w-10 h-10 bg-gray-700 border border-gray-500 rounded-lg flex justify-center items-center">
-                    <img src="https://placehold.co/32x32" alt="Ability W">
-                </div>
-                <div class="w-10 h-10 bg-gray-700 border border-gray-500 rounded-lg flex justify-center items-center">
-                    <img src="https://placehold.co/32x32" alt="Ability E">
-                </div>
-                <div class="w-10 h-10 bg-gray-700 border border-gray-500 rounded-lg flex justify-center items-center">
-                    <img src="https://placehold.co/32x32" alt="Ability R">
-                </div>
-                <div class="w-10 h-10 bg-gray-700 border border-gray-500 rounded-lg flex justify-center items-center">
-                    <img src="https://placehold.co/32x32" alt="Ability D">
-                </div>
-                <div class="w-10 h-10 bg-gray-700 border border-gray-500 rounded-lg flex justify-center items-center">
-                    <img src="https://placehold.co/32x32" alt="Ability F">
-                </div>
-            </div>
-
-            <!-- Health and Mana Bars (moved below abilities) -->
-            <div class="flex flex-col space-y-1 pt-2">
-                <!-- Health Bar -->
-                <div class="flex items-center">
-                    <div class="bg-red-700 rounded-full w-48 h-3 overflow-hidden">
-                        <div class="bg-green-500 h-full" style="width: 80%;"></div>
-                    </div>
-                    <span class="text-white text-xs font-bold pl-2">763 / 914</span>
-                </div>
-
-                <!-- Mana Bar -->
-                <div class="flex items-center">
-                    <div class="bg-gray-600 rounded-full w-48 h-3 overflow-hidden">
-                        <div class="bg-yellow-400 h-full" style="width: 100%;"></div>
-                    </div>
-                    <span class="text-white text-xs font-bold pl-2">200 / 200</span>
-                </div>
+            <div class="col-6 text-start">
+                <p>1 tsp.</p>
+                <p>4 cups</p>
+                <p>chopped</p>
+                <p>2 TBSP</p>
+                <p>diced</p>
+                <p>1 cup</p>
+                <p>1/2 cup</p>
             </div>
         </div>
     </div>
+</div>
 
 </body>
 </html>

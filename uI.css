@@ -1,0 +1,29 @@
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.🔒 {
+    text-align: center;
+    font-family: 'VT323', monospace;
+    padding: 20px;
+}
+.📝 {
+    font-family: 'Bangers', cursive;
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+.📄 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+.📜 {
+    font-size: 1.5rem;
+}
+output {
+    display: block; /* Rend l'élément en bloc comme <p> */
+    margin: 0 0 1em; /* Ajoute un espacement en bas comme pour <p> */
+    font-size: 1.5rem; /* Ajuste la taille pour correspondre à .📄 ou .📜 */
+}
